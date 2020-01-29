@@ -12,21 +12,63 @@
     <title>Registration Form</title>
   </head>
   <body>
-    <h1>Hello there, everything is working just fine</h1>
     <div id="main-form" class="form-container">
       <form action="/" method="post">
-        <div id="label__full-name" class="label-container">
-          <label for="full-name">Full Name: </label>
-          <input name="full-name" id="full-name" />
-        </div>
-        <div id="label__matrix" class="label-container">
-          <label for="matrix">Matrix Card Number:</label>
-          <input type="text" id="matrix" name="matrix">
-        </div>
-        <div id="label__email" class="label-container">
-          <label for="email">Email:</label>
-          <input type="email" name="email-input" id="email-input">
-        </div>
+        <section id="main-sec" class="form-section">
+          <h3 class="section-title">Personal Info...</h3>
+          <div id="label__full-name" class="label-container">
+            <label for="full-name">Full Name: </label>
+            <input type="text" name="fullName" id="full-name" required />
+          </div>
+          <div id="label__matrix" class="label-container">
+            <label for="matrix">Matrix Card Number:</label>
+            <input type="text" id="matrix" name="matrix" required />
+          </div>
+          <div id="label__school" class="label-container">
+            <label for="schoolInput">Faculty/school  <em>(eg: school of Electrical engineering)</em>:</label>
+            <input type="text" name="schoolInput" id="school-input" required />
+          </div>
+          <div id="label__phone" class="label-container">
+            <label for="phoneInput">Phone Number (WhatsApp):</label>
+            <input type="text" name="phoneInput" id="phone-input" required />
+          </div>
+          <div id="label__email" class="label-container">
+            <label for="emailInput">Email:</label>
+            <input type="email" name="emailInput" id="email-input" required />
+          </div>
+        </section>
+
+        <section id="prev-exp" class="form-section">
+          <h3 class="section-title">Previous Experience...</h3>
+          <div id="label__web-exp" class="label-container">
+            <label for="webExperience" class="block">
+              Learned anything related to Web Development in the past?
+            </label>
+            <label class="container">Yes
+              <input type="radio" name="webExperience" value="yes">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">No
+              <input type="radio" name="webExperience" value="">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div id="label__rbc-exp" class="label-container">
+            <label for="rbcExperience" class="block">
+              Attended a workshop organized by UTM Robocon?
+            </label>
+            <label class="container">Yes
+              <input type="radio" name="rbcExperience" value="yes">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">No
+              <input type="radio" name="rbcExperience" value="">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </section>
+
+        <input type="submit" value="submit" />
       </form>
     </div>
   </body>
