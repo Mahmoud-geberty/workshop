@@ -7,92 +7,108 @@ var phone = document.querySelector("#phone");
 var email = document.querySelector("#email");
 
 //regular expressions for each field
-var nameRegex = /^[a-zA-Z ]{2,30}$/; // only 1 space, b/n 2 to 30 chars
-var matrixRegex = /^[A-Z0-9]{7,9}$/; // uppercase letters and digits, no spaces
-var schoolRegex = /^[a-zA-Z ]{2,50}$/; // same as name but longer
-var phoneRegex = /^\d{6,15}$/; // digits only
-var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const nameRegex = /^[a-zA-Z ]{2,30}$/; // only 1 space, b/n 2 to 30 chars
+const matrixRegex = /^[A-Z0-9]{7,9}$/; // uppercase letters and digits, no spaces
+const schoolRegex = /^[a-zA-Z ]{2,50}$/; // same as name but longer
+const phoneRegex = /^\d{6,15}$/; // digits only
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 // validation flag
-var flag = 0;
+var flag = 1;
 
 // register the event listener callbacks
 
-fullName.addEventListener("focusout", validateName);
-matrix.addEventListener("input", () => matrix.value = matrix.value.toUpperCase());
-matrix.addEventListener("focusout", validateMatrix);
-school.addEventListener("focusout", validateSchool);
+fullName.addEventListener("focusout", () =>
+  validate(fullName, nameRegex, [2, 30], "(no digits allowed, only letters)")
+);
+matrix.addEventListener(
+  "input",
+  () => (matrix.value = matrix.value.toUpperCase())
+);
+matrix.addEventListener("focusout", () =>
+  validate(
+    matrix,
+    matrixRegex,
+    [7, 9],
+    "(only digits and letters with no spaces)"
+  )
+);
+school.addEventListener("focusout", () =>
+  validate(school, schoolRegex, [2, 50], "(no digits allowed, only letters)")
+);
+phone.addEventListener("focusout", () =>
+  validate(phone, phoneRegex, [6, 15], "(digits only, no letters or symbols)")
+);
+email.addEventListener("focusout", () =>
+  validate(email, emailRegex, null, "(please provide a valid email address)")
+);
 
-// validation functions for each field
+// validation function
 
-//name
-function validateName() {
+function validate(element, regex, range, invalidMsg) {
   // validate presence of value and length
-  if (fullName.value.length < 2 || fullName.value.length > 30) {
-    fullName.previousElementSibling.innerHTML = "*This field cannot be empty (2 to 30 characters long)";
-    fullName.style = "border: red 2px solid";
-    flag = 1;
-    return;
+  if (range) {
+    var min = range[0];
+    var max = range[1];
+
+    if (element.value.length < min || element.value.length > max) {
+      element.previousElementSibling.innerHTML = `*This field cannot be empty (${min} to ${max} characters long)`;
+      element.style = "border: red 2px solid; color: red;";
+      flag = 1;
+      return false;
+    } else {
+      element.previousElementSibling.innerHTML = "";
+      element.style = "border: #05aa05 2px solid; color: #05aa05;";
+      flag = 0;
+    }
   } else {
-    fullName.previousElementSibling.innerHTML = "";
-    fullName.style = "border: green 2px solid";
-    flag = 0;
+    if (element.value.length < 1) {
+      element.previousElementSibling.innerHTML = `*This field cannot be empty`;
+      element.style = "border: red 2px solid; color: red;";
+      flag = 1;
+      return false;
+    } else {
+      element.previousElementSibling.innerHTML = "";
+      element.style = "border: #05aa05 2px solid; color: #05aa05;";
+      flag = 0;
+    }
   }
 
   // validate value against pattern
-  if (!nameRegex.test(fullName.value)) {
-    fullName.previousElementSibling.innerHTML = "*This field is invalid (no digits allowed, only letters)";
-    fullName.style = "border: red 2px solid";
+  if (!regex.test(element.value)) {
+    element.previousElementSibling.innerHTML = `*This field is invalid ${invalidMsg}`;
+    element.style = "border: red 2px solid; color: red";
     flag = 1;
   } else {
-    fullName.previousElementSibling.innerHTML = "";
-    fullName.style = "border: green 2px solid";
+    element.previousElementSibling.innerHTML = "";
+    element.style = "border: #05aa05 2px solid; color: #05aa05;";
     flag = 0;
-  } 
+    return true;
+  }
 }
 
-function validateMatrix() {
-  if (matrix.value.length < 7 || matrix.value.length > 9) {
-    matrix.previousElementSibling.innerHTML = "*This field cannot be empty (7 to 9 characters long)";
-    matrix.style = "border: red 2px solid";
-    flag = 1;
-    return;
-  } else {
-    matrix.previousElementSibling.innerHTML = "";
-    matrix.style = "border: green 2px solid";
-    flag = 0;
-  } 
+// One final validation before submitting the form
 
-  if (!matrixRegex.test(matrix.value)) {
-    matrix.previousElementSibling.innerHTML = "*This field is invalid (only digits and letters with no spaces)";
-    matrix.style = "border: red 2px solid";
-    flag = 1;
-  } else {
-    matrix.previousElementSibling.innerHTML = "";
-    matrix.style = "border: green 2px solid";
-    flag = 0;
-  } 
-}
+// set arrays of fields and their validations props
+const elements = [fullName, matrix, school, phone, email];
+const patterns = [nameRegex, matrixRegex, schoolRegex, phoneRegex, emailRegex];
+const ranges = [[2, 30], [7, 9], [2, 50], [6, 15], null];
+const messages = [
+  "(no digits allowed, only letters)",
+  "(only digits and letters with no spaces)",
+  "(no digits allowed, only letters)",
+  "(digits only, no letters or symbols)",
+  "(please provide a valid email address)"
+];
 
-function validateSchool() {
-  if (school.value.length < 2 || school.value.length > 50) {
-    school.previousElementSibling.innerHTML = "*This field cannot be empty (2 to 50 characters long)";
-    school.style = "border: red 2px solid";
-    flag = 1;
-    return;
-  } else {
-    school.previousElementSibling.innerHTML = "";
-    school.style = "border: green 2px solid";
-    flag = 0;
-  } 
-
-  if (!schoolRegex.test(school.value)) {
-    school.previousElementSibling.innerHTML = "*This field is invalid (only digits and letters with no spaces)";
-    school.style = "border: red 2px solid";
-    flag = 1;
-  } else {
-    school.previousElementSibling.innerHTML = "";
-    school.style = "border: green 2px solid";
-    flag = 0;
-  } 
-}
+// validate each elements until the first invalid one
+// only submit if everything is valid
+regForm.addEventListener("submit", (e) => {
+  if (flag) {
+    elements.forEach((element, i) => {
+      validate(element, patterns[i], ranges[i], messages[i]);
+    });
+    alert("submit failed, please make sure all fields are valid");
+    e.preventDefault();
+  }
+});
