@@ -13,28 +13,35 @@
   </head>
   <body>
     <div id="main-form" class="form-container">
-      <form action="/" method="post">
+      <form action="/" method="post" name = "regForm">
         <section id="main-sec" class="form-section">
           <h3 class="section-title">Personal Info...</h3>
           <div id="label__full-name" class="label-container">
             <label for="full-name">Full Name: </label>
-            <input type="text" name="fullName" id="full-name" required />
+            <div class="error"></div>
+            <input type="text" name="fullName" id="full-name" />
           </div>
           <div id="label__matrix" class="label-container">
             <label for="matrix">Matrix Card Number:</label>
-            <input type="text" id="matrix" name="matrix" required />
+            <div class="error"></div>
+            <input type="text" id="matrix" name="matrix"  />
           </div>
           <div id="label__school" class="label-container">
-            <label for="schoolInput">Faculty/school  <em>(eg: school of Electrical engineering)</em>:</label>
-            <input type="text" name="schoolInput" id="school-input" required />
+            <label for="schoolInput">
+              Faculty/school<em>(eg: school of Electrical engineering)</em>:
+            </label>
+            <div class="error"></div>
+            <input type="text" name="schoolInput" id="school" />
           </div>
           <div id="label__phone" class="label-container">
             <label for="phoneInput">Phone Number (WhatsApp):</label>
-            <input type="text" name="phoneInput" id="phone-input" required />
+            <div class="error"></div>
+            <input type="text" name="phoneInput" id="phone" />
           </div>
           <div id="label__email" class="label-container">
             <label for="emailInput">Email:</label>
-            <input type="email" name="emailInput" id="email-input" required />
+            <div class="error"></div>
+            <input type="text" name="emailInput" id="email" />
           </div>
         </section>
 
@@ -44,26 +51,30 @@
             <label for="webExperience" class="block">
               Learned anything related to Web Development in the past?
             </label>
-            <label class="container">Yes
-              <input type="radio" name="webExperience" value="yes">
-              <span class="checkmark"></span>
+            <label class="container"
+              >Yes
+              <input type="radio" name="webExperience" value="yes" />
+              <div class="checkmark"></div>
             </label>
-            <label class="container">No
-              <input type="radio" name="webExperience" value="">
-              <span class="checkmark"></span>
+            <label class="container"
+              >No
+              <input type="radio" name="webExperience" value="" checked />
+              <div class="checkmark"></div>
             </label>
           </div>
           <div id="label__rbc-exp" class="label-container">
             <label for="rbcExperience" class="block">
               Attended a workshop organized by UTM Robocon?
             </label>
-            <label class="container">Yes
-              <input type="radio" name="rbcExperience" value="yes">
-              <span class="checkmark"></span>
+            <label class="container"
+              >Yes
+              <input type="radio" name="rbcExperience" value="yes" />
+              <div class="checkmark"></div>
             </label>
-            <label class="container">No
-              <input type="radio" name="rbcExperience" value="">
-              <span class="checkmark"></span>
+            <label class="container"
+              >No
+              <input type="radio" name="rbcExperience" value="" checked />
+              <div class="checkmark"></div>
             </label>
           </div>
         </section>
@@ -71,5 +82,7 @@
         <input type="submit" value="submit" />
       </form>
     </div>
+
+    <script src="/js/validate.js"></script>
   </body>
 </html>

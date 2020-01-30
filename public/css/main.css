@@ -5,6 +5,7 @@ body {
 input[type="text"], input[type="email"]{
   display: block;
   margin-top: 5px;
+  font-size: 16px;
   border: none;
   border-radius: 5px;
   border-bottom: solid 2px gray;
@@ -16,7 +17,7 @@ input:not([type="submit"]):focus {
   border-top: white;
   border-right: white;
   border-left: white;
-  border-bottom: solid 3px #328ef7;
+  border-bottom: solid 2px #2196f3;
 }
 
 input[type="submit"] {
@@ -25,11 +26,20 @@ input[type="submit"] {
   margin-top: 1rem;
   width: 60%;
   height: 2rem;
+  cursor: pointer; 
   font-size: 20px;
+  border: black 1px solid;
+  border-radius: 5px;
+  color: black;
+  background-color: #ccc;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
   border: none;
   border-radius: 5px;
   color: white;
-  background-color: #328ef7;
+  background-color: #2196f3;
 }
 
 label {
@@ -60,10 +70,9 @@ h3.section-title {
   padding: 0.5rem;
 }
 
-.radio-option {
-  height: 1.75rem;
-  width: 1.75rem;
-  margin-top: 0.5rem;
+.error {
+  color: red;
+  font-size: 18px;
 }
 
 .container {
